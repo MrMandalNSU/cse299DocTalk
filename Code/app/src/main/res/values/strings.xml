@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">DocTalk</string>
+
+    <string-array name="names">
+        <item> Symptoms </item>
+        <item> Fever </item>
+        <item> Cough </item>
+        <item> Headache </item>
+        <item> Runny Nose </item>
+        <item> Sore Throat </item>
+        <item> Muscle Pain </item>
+        <item> Fatigue </item>
+        <item> Diarrhea </item>
+        <item> Increased thirst </item>
+        <item> Frequent urination </item>
+        <item> Extreme hunger </item>
+        <item> Unexplained weight loss </item>
+        <item> Irritability </item>
+        <item> Conjunctivitis </item>
+        <item> Loss of taste or smell </item>
+        <item> Chest pain </item>
+        <item> Pressure </item>
+
+    </string-array>
 </resources>

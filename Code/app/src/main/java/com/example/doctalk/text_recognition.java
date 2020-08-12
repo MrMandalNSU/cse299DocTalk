@@ -51,7 +51,7 @@ public class text_recognition extends AppCompatActivity {
             public void onClick(View view)
             {
                 dispatchTakePictureIntent();
-                textView.setText("");
+                textView.setText(" ");
 
 
 

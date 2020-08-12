@@ -3,7 +3,9 @@
     package="com.example.doctalk">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -13,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".text_recognition"></activity>
+        <activity android:name=".Patient_Info"/>
+        <activity android:name=".text_recognition" />
         <activity android:name=".Splash" />
         <activity android:name=".Login" />
         <activity android:name=".Register">
@@ -27,6 +30,7 @@
             <meta-data
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
                 android:value="ocr" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
