@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         ocrbutton = findViewById(R.id.ocr_btn);
         patientsymptoms =  findViewById(R.id.symptoms_Btn);
 
+
+
         ocrbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
