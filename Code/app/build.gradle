@@ -31,15 +31,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.firebase:firebase-core:15.0.2'
     implementation 'com.google.firebase:firebase-ml-vision:15.0.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    //image crop library
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
-
-    //image to text google library
-    implementation 'com.google.android.gms:play-services-vision:16.2.0'
 
 }
