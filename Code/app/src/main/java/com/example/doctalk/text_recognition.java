@@ -198,6 +198,108 @@ public class text_recognition extends AppCompatActivity {
         return result && result1;
     }
 
+    //Handle permission result
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case CAMERA_REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    boolean cameraaccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean writestorageaccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                    if (cameraaccepted && writestorageaccepted) {
+                        PickCamera();
+                    } else {
+                        Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+                break;
+            case STORAGE_REQUEST_CODE:
+                if (grantResults.length > 0) {
+
+                    boolean writestorageaccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                    if (writestorageaccepted) {
+                        PickGallery();
+                    } else {
+                        Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // get image from camera
+        if (resultCode == RESULT_OK)
+        {
+            if (requestCode == IMAGE_PICK_GALLERY_CODE)
+            {
+                // get that image from gallery now crop the image
+                CropImage.activity(data.getData()).setGuidelines(CropImageView.Guidelines.ON).start(this); // enable image guideline
+
+            }
+            if (requestCode == IMAGE_PICK_CAMERA_CODE)
+            {
+                // got the image from camera now crop it
+                CropImage.activity(image_uri).setGuidelines(CropImageView.Guidelines.ON).start(this);
+            }
+        }
+
+        // get the crop image
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
+        {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK)
+            {
+                Uri resultUri = result.getUri(); // set image  to imageview
+                mImagePreview.setImageURI(resultUri);
+
+                // get drawable bitmap for text recog.
+
+                BitmapDrawable bitmapDrawable = (BitmapDrawable)mImagePreview.getDrawable();
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+
+                TextRecognizer recognizer = new TextRecognizer.Builder(getApplicationContext()).build();
+
+                if (!recognizer.isOperational())
+
+                {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Frame frame = new Frame.Builder().setBitmap(bitmap).build();
+                    SparseArray<TextBlock> items = recognizer.detect(frame);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    // get text from string builder until there is no text.
+
+                    for (int i = 0; i<items.size(); i++)
+                    {
+                        TextBlock myItem = items.valueAt(i);
+                        stringBuilder.append(myItem.getValue());
+                        stringBuilder.append("\n");
+
+                    }
+
+                    //set text to edit text
+
+                    mResult.setText(stringBuilder.toString());
+                }
+            }
+            else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
+            {
+                // If there is any error show that.
+                Exception error = result.getError();
+                Toast.makeText(this, ""+ error, Toast.LENGTH_SHORT).show();
+            }
+        }
 
     }
 }
