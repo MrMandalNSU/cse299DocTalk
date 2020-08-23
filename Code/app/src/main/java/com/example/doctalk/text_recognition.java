@@ -82,7 +82,7 @@ public class text_recognition extends AppCompatActivity {
 
     }
 
-    //action bar menu
+    //action bar menu //latest
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
