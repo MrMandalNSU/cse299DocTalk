@@ -3,4 +3,15 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    
+    
+    <color name="grey">#F7C3C3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="register">#F1ECEC</color>
+    <color name="google">#F1E7E7</color>
+    <color name="signup">#968F8F</color>
+    <color name="border">#D9D0D0</color>
+
+
+
 </resources>

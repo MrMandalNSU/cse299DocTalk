@@ -25,7 +25,6 @@ public class Patient_Info extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
         list.add("Enter Your Symptoms");
-        list.add("Symptoms");
         list.add("Fever");
         list.add("Cough");
         list.add("Headache");
