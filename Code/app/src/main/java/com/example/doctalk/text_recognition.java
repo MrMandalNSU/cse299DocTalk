@@ -53,17 +53,15 @@ public class text_recognition extends AppCompatActivity {
     ImageView mImagePreview;
 
 
-     private static final int CAMERA_REQUEST_CODE = 200;
-     private static final int STORAGE_REQUEST_CODE = 400;
-     private static final int IMAGE_PICK_GALLERY_CODE = 1000;
-     private static final int IMAGE_PICK_CAMERA_CODE = 1001;
+    private static final int CAMERA_REQUEST_CODE = 200;
+    private static final int STORAGE_REQUEST_CODE = 400;
+    private static final int IMAGE_PICK_GALLERY_CODE = 1000;
+    private static final int IMAGE_PICK_CAMERA_CODE = 1001;
 
-     String cameraPermission[];
-     String storagePermission[];
+    String cameraPermission[];
+    String storagePermission[];
 
-     Uri image_uri;
-
-
+    Uri image_uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +81,8 @@ public class text_recognition extends AppCompatActivity {
 
 
     }
-      //action bar menu
+
+    //action bar menu //latest
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -94,7 +93,6 @@ public class text_recognition extends AppCompatActivity {
 
 
     // handle actionbar item clicks
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -202,7 +200,6 @@ public class text_recognition extends AppCompatActivity {
 
     //Handle permission result
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -281,7 +278,7 @@ public class text_recognition extends AppCompatActivity {
                     Frame frame = new Frame.Builder().setBitmap(bitmap).build();
                     SparseArray<TextBlock> items = recognizer.detect(frame);
                     StringBuilder stringBuilder = new StringBuilder();
-                     // get text from stringbulder untill there is no text.
+                    // get text from string builder until there is no text.
 
                     for (int i = 0; i<items.size(); i++)
                     {
@@ -303,5 +300,6 @@ public class text_recognition extends AppCompatActivity {
                 Toast.makeText(this, ""+ error, Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 }
