@@ -11,7 +11,8 @@
     <color name="google">#F1E7E7</color>
     <color name="signup">#968F8F</color>
     <color name="border">#D9D0D0</color>
-
+    <color name="loginborder">#F8F8F8</color>
+    <color name="lborder">#F8F8F8</color>
 
 
 </resources>
