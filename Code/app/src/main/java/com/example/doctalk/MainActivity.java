@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ocrbutton = findViewById(R.id.ocr_btn); //ocr button
-        patientsymptoms =  findViewById(R.id.symptoms_Btn);
+        ocrbutton = (Button) findViewById(R.id.ocr_btn); //ocr button
+        patientsymptoms = (Button) findViewById(R.id.symptoms_Btn);
 
 
 

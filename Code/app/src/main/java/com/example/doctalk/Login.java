@@ -22,7 +22,7 @@ public class Login extends AppCompatActivity {
     EditText mEmail, mPassword;
     Button mLoginbtn;
     TextView mCreatebtn;
-    ProgressBar progressBar;
+    ProgressBar mProgressBar;
     FirebaseAuth fAuth;
 
 
@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
 
         mEmail = findViewById(R.id.Email);
         mPassword = findViewById(R.id.password);
-        progressBar = findViewById(R.id.progressBar);
+        mProgressBar = findViewById(R.id.progressBar2);
         fAuth = FirebaseAuth.getInstance();
         mLoginbtn = findViewById(R.id.loginbtn);
         mCreatebtn = findViewById(R.id.createtext);
@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                progressBar.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.VISIBLE);
 
                 // Authenticate User.
 
@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
                         else
                         {
                             Toast.makeText(Login.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
+                            mProgressBar.setVisibility(View.GONE);
                         }
                     }
                 });

@@ -33,7 +33,7 @@ public class Register extends AppCompatActivity {
     Button mRegisterbtn;
     TextView mLoginbtn;
     FirebaseAuth fAuth;
-    ProgressBar progressBar;
+    ProgressBar mProgressBar;
     FirebaseFirestore fStore;
     String userID;
 
@@ -52,7 +52,7 @@ public class Register extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
-        progressBar = findViewById(R.id.progressBar);
+        mProgressBar = findViewById(R.id.progressBar);
 
         if (fAuth.getCurrentUser() != null) {
 
@@ -85,7 +85,7 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
-                progressBar.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.VISIBLE);
 
                 // Register the user in Firebase
 
@@ -118,7 +118,7 @@ public class Register extends AppCompatActivity {
 
                         } else {
                             Toast.makeText(Register.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
+                            mProgressBar.setVisibility(View.GONE);
 
                         }
                     }
