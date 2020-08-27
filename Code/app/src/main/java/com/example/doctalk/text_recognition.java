@@ -230,6 +230,7 @@ public class text_recognition extends AppCompatActivity {
 
 
                 }
+                break;
         }
     }
 
