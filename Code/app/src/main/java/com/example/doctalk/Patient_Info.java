@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,6 +55,8 @@ public class Patient_Info extends AppCompatActivity {
                 PatientHelperClass patientHelperClass = new PatientHelperClass(name, age, location, phone, addiSymptoms);
 
                 reference.child(phone).setValue(patientHelperClass);
+
+                Toast.makeText(Patient_Info.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
 
             }
         });
