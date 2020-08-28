@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Patient_Info"/>
+        <activity android:name=".DoctorClass"></activity>
+        <activity android:name=".PatientClass" />
+        <activity android:name=".Patient_Info" />
         <activity android:name=".text_recognition" />
         <activity android:name=".Splash" />
         <activity android:name=".Login" />
@@ -44,8 +46,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/AppTheme"/> <!-- optional (needed if default theme has no action bar) -->
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
