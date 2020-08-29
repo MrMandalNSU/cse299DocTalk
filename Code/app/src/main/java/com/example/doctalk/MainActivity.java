@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button ocrbutton;
     private Button patientsymptoms;
+    private Button profilebutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         ocrbutton = (Button) findViewById(R.id.ocr_btn); //ocr button
         patientsymptoms = (Button) findViewById(R.id.symptoms_Btn);
+        profilebutton = (Button) findViewById(R.id.profile_btn);
 
 
 
@@ -42,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity( intent2);
                 finish();
 
+            }
+        });
+
+        profilebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3 = new Intent(MainActivity.this,Profile.class);
+                startActivity( intent3);
             }
         });
 
