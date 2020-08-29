@@ -93,7 +93,7 @@ public class LoginDoc extends AppCompatActivity {
                                     else {
                                         Toast.makeText(LoginDoc.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
 
-                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                        startActivity(new Intent(getApplicationContext(), MainActivityDoc.class));
                                     }
                                 }
                             });
