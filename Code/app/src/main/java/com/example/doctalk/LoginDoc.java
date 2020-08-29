@@ -24,29 +24,27 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class Login extends AppCompatActivity {
+public class LoginDoc extends AppCompatActivity {
     EditText mEmail, mPassword;
     Button mLoginbtn;
-    TextView mCreatebtn, mDoctorLogIn;
+    TextView mPatientLogIn;
     ProgressBar mProgressBar;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userID;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_doc);
 
-        mEmail = findViewById(R.id.Email);
-        mPassword = findViewById(R.id.password);
-        mProgressBar = findViewById(R.id.progressBar2);
+        mEmail = findViewById(R.id.EmailDoc);
+        mPassword = findViewById(R.id.passwordDoc);
+        mProgressBar = findViewById(R.id.progressBar2Doc);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
-        mLoginbtn = findViewById(R.id.loginbtn);
-        mCreatebtn = findViewById(R.id.createtext);
-        mDoctorLogIn = findViewById(R.id.doctorLogIn);
+        mLoginbtn = findViewById(R.id.loginbtnDoc);
+        mPatientLogIn = findViewById(R.id.patientLogIn);
 
         mLoginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +77,7 @@ public class Login extends AppCompatActivity {
                 fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        final String patient = new String("Patient");
+                        final String doctor = new String("Doctor");
                         if(task.isSuccessful())
                         {
                             userID = fAuth.getCurrentUser().getUid();
@@ -88,12 +86,12 @@ public class Login extends AppCompatActivity {
                                 @Override
                                 public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                                     String userType = value.getString("userType").toString();
-                                    if(!userType.equals(patient)) {
-                                        Toast.makeText(Login.this, "You are not a patient! Go to Doctor sign in page.", Toast.LENGTH_SHORT).show();
+                                    if(!userType.equals(doctor)) {
+                                        Toast.makeText(LoginDoc.this, "You are not a doctor! Go to Patient sign in page.", Toast.LENGTH_SHORT).show();
                                         mProgressBar.setVisibility(View.GONE);
                                     }
                                     else {
-                                        Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginDoc.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
 
                                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                     }
@@ -102,7 +100,7 @@ public class Login extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(Login.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginDoc.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             mProgressBar.setVisibility(View.GONE);
                         }
                     }
@@ -112,20 +110,11 @@ public class Login extends AppCompatActivity {
         });
 
 
-        mCreatebtn.setOnClickListener(new View.OnClickListener() {
+        mPatientLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(),Register.class));
-            }
-        });
-
-
-        mDoctorLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(getApplicationContext(), LoginDoc.class));
+                startActivity(new Intent(getApplicationContext(), Login.class));
             }
         });
 
