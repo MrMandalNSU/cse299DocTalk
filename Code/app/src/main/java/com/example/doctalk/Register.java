@@ -51,6 +51,16 @@ public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!=null) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -193,7 +203,7 @@ public class Register extends AppCompatActivity {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 // ...
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Failed: Error Occurred", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -207,11 +217,14 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
                         } else {
                             // If sign in fails, display a message to the user.
 
+                            Toast.makeText(Register.this, "Sorry Authentication Failed", Toast.LENGTH_SHORT).show();
                             
                         }
 
@@ -219,6 +232,5 @@ public class Register extends AppCompatActivity {
                     }
                 });
     }
-
 
 }
