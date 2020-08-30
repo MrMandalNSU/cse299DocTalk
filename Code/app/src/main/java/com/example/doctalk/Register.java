@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,15 +28,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Register extends AppCompatActivity {
+
 
     public static final String TAG = "TAG";
     EditText mfullname, mEmail, mPassword, mPhone;
@@ -44,6 +50,8 @@ public class Register extends AppCompatActivity {
     ProgressBar mProgressBar;
     FirebaseFirestore fStore;
     String userID;
+    String mUserType;
+    Spinner spinner;
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 123;
 
@@ -71,11 +79,16 @@ public class Register extends AppCompatActivity {
         mPhone = findViewById(R.id.phone);
         mRegisterbtn = findViewById(R.id.registerbtn);
         mLoginbtn = findViewById(R.id.createtext);
+        spinner = findViewById(R.id.spinner);
+
 
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         mProgressBar = findViewById(R.id.progressBar);
+
+        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.UserType,R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         if (fAuth.getCurrentUser() != null) {
 
@@ -91,6 +104,7 @@ public class Register extends AppCompatActivity {
                 String password = mPassword.getText().toString().trim();
                 final String fullName = mfullname.getText().toString();
                 final String phone = mPhone.getText().toString();
+                final String userType = spinner.getSelectedItem().toString();
 
                 if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required.");
@@ -118,30 +132,30 @@ public class Register extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             Toast.makeText(Register.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
-                            userID = fAuth.getCurrentUser().getUid();
-                            DocumentReference documentReference = fStore.collection("users").document(userID);
-                            final String userType = "Patient";
-                            Map<String, Object> user = new HashMap<>();
-                            user.put("fName", fullName);
-                            user.put("email", email);
-                            user.put("phone", phone);
-                            user.put("userType", userType);
-                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                            UserRegistration userRegistration = new UserRegistration(fullName,email,phone,userType);
+                            FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(userRegistration).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "onSuccess: user Profile is created for " + userID);
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d(TAG, "onFailure: " + e.toString());
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        Toast.makeText(Register.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Toast.makeText(Register.this,"Failed to Register",Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
                             });
+
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
                         } else {
-                            Toast.makeText(Register.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            mProgressBar.setVisibility(View.GONE);
+                            if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                                Toast.makeText(Register.this, "User is already registered", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(Register.this, "Error"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            }
 
                         }
                     }

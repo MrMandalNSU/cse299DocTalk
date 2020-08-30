@@ -18,20 +18,29 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.util.Objects;
+
 public class Login extends AppCompatActivity {
     EditText mEmail, mPassword;
     Button mLoginbtn;
-    TextView mCreatebtn, mDoctorLogIn;
+    TextView mCreatebtn;
     ProgressBar mProgressBar;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userID;
+    String userType;
+    DatabaseReference databaseReference;
 
 
     @Override
@@ -46,7 +55,7 @@ public class Login extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         mLoginbtn = findViewById(R.id.loginbtn);
         mCreatebtn = findViewById(R.id.createtext);
-        mDoctorLogIn = findViewById(R.id.doctorLogIn);
+
 
         mLoginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,23 +91,41 @@ public class Login extends AppCompatActivity {
                         final String patient = new String("Patient");
                         if(task.isSuccessful())
                         {
-                            userID = fAuth.getCurrentUser().getUid();
-                            DocumentReference documentReference = fStore.collection("users").document(userID);
-                            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            String UserId = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
+                            databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(UserId);
+                            databaseReference.addValueEventListener(new ValueEventListener() {
                                 @Override
-                                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                                    String userType = value.getString("userType").toString();
-                                    if(!userType.equals(patient)) {
-                                        Toast.makeText(Login.this, "You are not a patient! Go to Doctor sign in page.", Toast.LENGTH_SHORT).show();
-                                        mProgressBar.setVisibility(View.GONE);
-                                    }
-                                    else {
-                                        Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String type = Objects.requireNonNull(dataSnapshot.child("userType").getValue()).toString();
 
-                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    if(type.equals("Doctor"))
+                                    {
+                                        Toast.makeText(Login.this, type, Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(getApplicationContext(), DoctorClass.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+
                                     }
+
+                                    if (type.equals("Patient"))
+                                    {
+                                        Toast.makeText(Login.this, type, Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(getApplicationContext(), PatientClass.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                 }
                             });
+
+                            //Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+
                         }
                         else
                         {
@@ -121,13 +148,7 @@ public class Login extends AppCompatActivity {
         });
 
 
-        mDoctorLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                startActivity(new Intent(getApplicationContext(), LoginDoc.class));
-            }
-        });
 
 
 

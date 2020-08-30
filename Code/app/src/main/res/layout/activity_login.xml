@@ -89,20 +89,6 @@
         app:layout_constraintTop_toBottomOf="@+id/loginbtn"
         app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/doctorLogIn"
-        android:layout_width="344dp"
-        android:layout_height="25dp"
-        android:layout_marginBottom="136dp"
-        android:fontFamily="@font/bold"
-        android:text="Are you a Doctor? Go to Doctor Sign In page"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ProgressBar
         android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyle"
@@ -111,9 +97,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doctorLogIn" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.827" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
