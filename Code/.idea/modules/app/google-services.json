@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "498270468382-vmk4hq893gjg3qjb5ac61s8fm0tc3ls2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.doctalk",
+            "certificate_hash": "e85f0e7dfa47ba12c9d4288298af2b36b828ccbd"
+          }
+        },
+        {
           "client_id": "498270468382-9tce7o6kifqhqqknjhg3u3ktu0nljo4s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
