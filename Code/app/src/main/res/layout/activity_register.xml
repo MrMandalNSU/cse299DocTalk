@@ -17,27 +17,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
-
-    <EditText
-        android:id="@+id/fullname"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/bold"
-        android:hint="Full Name"
-        android:inputType="textPersonName"
-        android:textColor="@color/lborder"
-        android:textColorHighlight="@color/loginborder"
-        android:textColorLink="@color/loginborder"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.459" />
 
     <EditText
         android:id="@+id/Email"
@@ -57,27 +37,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullname"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/bold"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColor="@color/lborder"
-        android:textColorHighlight="@color/loginborder"
-        android:textColorLink="@color/loginborder"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.007" />
 
     <EditText
         android:id="@+id/phone"
@@ -97,7 +57,58 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.009" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="376dp"
+        android:layout_height="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.518" />
+
+    <EditText
+        android:id="@+id/fullname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/bold"
+        android:hint="Full Name"
+        android:inputType="textPersonName"
+        android:textColor="@color/lborder"
+        android:textColorHighlight="@color/loginborder"
+        android:textColorLink="@color/loginborder"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.227" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/bold"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="@color/lborder"
+        android:textColorHighlight="@color/loginborder"
+        android:textColorLink="@color/loginborder"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Email"
+        app:layout_constraintVertical_bias="0.011" />
 
     <Button
         android:id="@+id/registerbtn"
@@ -144,16 +155,26 @@
         app:layout_constraintVertical_bias="0.809" />
 
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="376dp"
-        android:layout_height="28dp"
+    <EditText
+        android:id="@+id/license"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/bold"
+        android:hint="License number"
+        android:inputType="textPersonName"
+        android:textColor="@color/lborder"
+        android:textColorHighlight="@color/loginborder"
+        android:textColorLink="@color/loginborder"
+        android:textSize="16sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.544" />
+        app:layout_constraintVertical_bias="0.577" />
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,7 +44,7 @@ public class Register extends AppCompatActivity {
 
 
     public static final String TAG = "TAG";
-    EditText mfullname, mEmail, mPassword, mPhone;
+    EditText mfullname, mEmail, mPassword, mPhone,mLicense;
     Button mRegisterbtn;
     TextView mLoginbtn;
     FirebaseAuth fAuth;
@@ -57,6 +58,7 @@ public class Register extends AppCompatActivity {
 
     Button verify;
     private FirebaseAuth mAuth;
+
 
     @Override
     protected void onStart() {
@@ -80,6 +82,7 @@ public class Register extends AppCompatActivity {
         mRegisterbtn = findViewById(R.id.registerbtn);
         mLoginbtn = findViewById(R.id.createtext);
         spinner = findViewById(R.id.spinner);
+        mLicense = findViewById(R.id.license);
 
 
 
@@ -89,6 +92,32 @@ public class Register extends AppCompatActivity {
 
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.UserType,R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                switch (position) {
+                    case 1:
+                        // set editbox visible
+                        mLicense.setVisibility(View.VISIBLE);
+                        break;
+                    case 2:
+                        // set editbox invivible
+                        mLicense.setVisibility(View.INVISIBLE);
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // set editbox invivible
+                mLicense.setVisibility(View.GONE);
+
+            }
+        });
 
         if (fAuth.getCurrentUser() != null) {
 
@@ -105,6 +134,7 @@ public class Register extends AppCompatActivity {
                 final String fullName = mfullname.getText().toString();
                 final String phone = mPhone.getText().toString();
                 final String userType = spinner.getSelectedItem().toString();
+                final String licenseNumber = mLicense.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required.");
@@ -130,8 +160,8 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isSuccessful()) {
-                            Toast.makeText(Register.this, "User Created Successfully", Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful() && TextUtils.isEmpty(licenseNumber)) {
+                            Toast.makeText(Register.this, "Patient Profile Created Successfully", Toast.LENGTH_SHORT).show();
 
                             UserRegistration userRegistration = new UserRegistration(fullName,email,phone,userType);
                             FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(userRegistration).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -147,9 +177,36 @@ public class Register extends AppCompatActivity {
                                 }
                             });
 
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), PatientClass.class));
 
-                        } else {
+                        }
+
+                        else if(task.isSuccessful())
+
+                        {
+                            Toast.makeText(Register.this, "Doctor Profile Created Successfully", Toast.LENGTH_SHORT).show();
+
+                            UserRegistrationDoctor userRegistrationDoctor = new UserRegistrationDoctor(fullName,email,phone,userType,licenseNumber);
+                            FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(userRegistrationDoctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        Toast.makeText(Register.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Toast.makeText(Register.this,"Failed to Register",Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                            startActivity(new Intent(getApplicationContext(), DoctorClass.class));
+
+
+
+
+
+                        }
+                        else {
                             if(task.getException() instanceof FirebaseAuthUserCollisionException){
                                 Toast.makeText(Register.this, "User is already registered", Toast.LENGTH_SHORT).show();
                             }else{
