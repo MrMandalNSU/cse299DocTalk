@@ -52,7 +52,7 @@
                 android:id="@+id/ytcard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:cardBackgroundColor="#fff"
                 app:cardCornerRadius="3dp"
                 app:cardElevation="3dp"
@@ -73,10 +73,11 @@
                         android:layout_marginLeft="50dp"
                         android:layout_marginRight="50dp"
 
-                        android:backgroundTint="#A7B3FF"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:onClick="searchYoutube"
                         android:text="Search On YouTube"
-                        android:textColor="#6C06C6"
-                        android:onClick="searchYoutube"/>
+                        android:textColor="#FFFFFF" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
