@@ -113,7 +113,7 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-                // set editbox invivible
+                // set editbox Gone
                 mLicense.setVisibility(View.GONE);
 
             }
@@ -199,11 +199,8 @@ public class Register extends AppCompatActivity {
 
                                 }
                             });
+
                             startActivity(new Intent(getApplicationContext(), DoctorClass.class));
-
-
-
-
 
                         }
                         else {
@@ -228,6 +225,10 @@ public class Register extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),Login.class));
             }
         });
+
+
+
+        //Google Sign In Starts Here.
 
         mAuth = FirebaseAuth.getInstance();
 
