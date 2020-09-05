@@ -75,7 +75,8 @@
 
                         android:backgroundTint="#A7B3FF"
                         android:text="Search On YouTube"
-                        android:textColor="#6C06C6" />
+                        android:textColor="#6C06C6"
+                        android:onClick="searchYoutube"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

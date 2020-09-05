@@ -48,6 +48,8 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.net.URI;
 import java.util.List;
 
+import static java.lang.Math.min;
+
 public class text_recognition extends AppCompatActivity {
 
     EditText mResult;
@@ -307,5 +309,23 @@ public class text_recognition extends AppCompatActivity {
             }
         }
 
+    }
+
+    // get url string to search for
+    public String getUrlString() {
+        String str = mResult.getText().toString();
+        String ret = "https://www.youtube.com/results?search_query=";
+
+        for(int i=0; i<min(str.length(), 250); i++) {
+            ret += str.charAt(i);
+        }
+
+        return ret;
+    }
+
+    // search on YouTube
+    public void searchYoutube(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getUrlString()));
+        startActivity(browserIntent);
     }
 }
