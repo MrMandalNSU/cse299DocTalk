@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -51,6 +52,7 @@ public class text_recognition extends AppCompatActivity {
 
     EditText mResult;
     ImageView mImagePreview;
+    CardView mSearchCard;
 
 
     private static final int CAMERA_REQUEST_CODE = 200;
@@ -72,6 +74,7 @@ public class text_recognition extends AppCompatActivity {
 
         mResult = findViewById(R.id.result);
         mImagePreview= findViewById(R.id.imagePreview);
+        mSearchCard = findViewById(R.id.ytcard);
 
 
         //Camera Permission
@@ -292,6 +295,8 @@ public class text_recognition extends AppCompatActivity {
                     //set text to edit text
 
                     mResult.setText(stringBuilder.toString());
+
+                    mSearchCard.setVisibility(View.VISIBLE);
                 }
             }
             else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
