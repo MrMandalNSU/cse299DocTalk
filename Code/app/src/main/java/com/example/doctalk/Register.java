@@ -67,6 +67,28 @@ public class Register extends AppCompatActivity {
     Button verify;
     private FirebaseAuth mAuth;
 
+    //Local database for doctor authentication
+    public void rCheck(String LN) {
+
+        ArrayList arr = new ArrayList();
+
+        arr.add("123321"); //Doc1
+        arr.add("234432"); //Doc2
+        arr.add("345543"); //Doc3
+        arr.add("456654"); //Doc4
+        arr.add("567765"); //Doc5
+        arr.add("678876"); //Doc6
+        arr.add("789987"); //Doc7
+
+        for(int i = 0; i < arr.size(); i++) {
+            String ss = arr.get(i).toString();
+
+            if(LN.equals(ss))
+                flag=true;
+        }
+    }
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -183,6 +205,8 @@ public class Register extends AppCompatActivity {
 
                         }
                     });
+
+                    rCheck(licenseNumber);
 
                     if(!flag) {
                         mLicense.setError("Invalid License Number");
