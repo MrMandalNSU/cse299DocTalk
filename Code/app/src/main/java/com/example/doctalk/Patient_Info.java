@@ -41,6 +41,8 @@ public class Patient_Info extends AppCompatActivity {
         patientInfoSubmitBtn = findViewById(R.id.patientinfobtn);
 
 
+
+
         patientInfoSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
