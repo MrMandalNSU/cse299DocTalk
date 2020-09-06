@@ -11,11 +11,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Patient_Info extends AppCompatActivity {
 
@@ -55,6 +57,7 @@ public class Patient_Info extends AppCompatActivity {
                 PatientHelperClass patientHelperClass = new PatientHelperClass(name, age, location, phone, addiSymptoms);
 
                 reference.child(phone).setValue(patientHelperClass);
+
 
                 Toast.makeText(Patient_Info.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
 

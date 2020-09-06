@@ -2,7 +2,6 @@
     <string name="app_name">DocTalk</string>
 
     <string-array name="UserType">
-        <item> Select One </item>
         <item> Doctor </item>
         <item> Patient </item>
 

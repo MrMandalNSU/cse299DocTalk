@@ -91,7 +91,11 @@ public class Register extends AppCompatActivity {
         mProgressBar = findViewById(R.id.progressBar);
 
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.UserType,R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        spinner.setPrompt("Select One");
+        spinner.setAdapter(new NothingSelectedSpinnerAdapter(adapter, R.layout.contact_spinner_row_nothing_selected,
+                        // R.layout.contact_spinner_nothing_selected_dropdown, // Optional
+                        this));
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
