@@ -270,9 +270,16 @@ public class Register extends AppCompatActivity {
                             if(task.getException() instanceof FirebaseAuthUserCollisionException){
                                 Toast.makeText(Register.this, "User is already registered", Toast.LENGTH_SHORT).show();
 
+                                mProgressBar.setVisibility(View.INVISIBLE);
+                                return;
+
 
                             }else{
                                 Toast.makeText(Register.this, "Error"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                mProgressBar.setVisibility(View.INVISIBLE);
+                                return;
+
 
                             }
 
