@@ -14,6 +14,7 @@ public class PatientClass extends AppCompatActivity {
     private Button ocrbutton;
     private Button patientsymptoms;
     private Button profilebutton;
+    private Button doctorList;
 
 
     @Override
@@ -28,6 +29,7 @@ public class PatientClass extends AppCompatActivity {
         ocrbutton = (Button) findViewById(R.id.ocr_btn); //ocr button
         patientsymptoms = (Button) findViewById(R.id.symptoms_Btn);
         profilebutton = (Button) findViewById(R.id.profile_btn);
+        doctorList = (Button) findViewById(R.id.doc_List);
 
 
 
@@ -57,6 +59,15 @@ public class PatientClass extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent3 = new Intent(PatientClass.this,Profile.class);
                 startActivity( intent3);
+                finish();
+            }
+        });
+
+        doctorList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent5 = new Intent(com.example.doctalk.PatientClass.this,DoctorList.class);
+                startActivity( intent5);
                 finish();
             }
         });

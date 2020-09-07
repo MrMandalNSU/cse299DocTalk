@@ -1,5 +1,7 @@
 package com.example.doctalk;
 
+import java.io.Serializable;
+
 public class PatientHelperClass {
 
 

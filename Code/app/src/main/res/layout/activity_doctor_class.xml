@@ -56,10 +56,10 @@
         android:text="OCR"
         app:layout_constraintBottom_toTopOf="@+id/logoutDoc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3Doc"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintVertical_bias="0.277" />
 
     <Button
         android:id="@+id/symptoms_BtnDoc"
@@ -80,8 +80,11 @@
         android:text="Your Profile"
         app:layout_constraintBottom_toTopOf="@+id/logoutDoc"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ocr_btnDoc"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.619" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
