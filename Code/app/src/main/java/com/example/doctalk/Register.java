@@ -62,7 +62,7 @@ public class Register extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 123;
 
-    boolean flag=false;
+    boolean flag=true;
 
     Button verify;
     private FirebaseAuth mAuth;
@@ -86,6 +86,11 @@ public class Register extends AppCompatActivity {
             if(LN.equals(ss))
                 flag=true;
         }
+    }
+
+    public static char getCharFromString(String str, int index)
+    {
+        return str.charAt(index);
     }
 
 
@@ -185,6 +190,8 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
+                // -- Previous DocAuth Method -- //
+                /*
                 if(!TextUtils.isEmpty(licenseNumber)) {
 
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("DocAuth");
@@ -195,7 +202,7 @@ public class Register extends AppCompatActivity {
 
                                 String ss = (String) snapshot.getValue().toString();
 
-                                if (licenseNumber.equals(ss))
+                                if (licenseNumber.equals(ss) && licenseNumber.length()==6)
                                         flag = true;
                             }
                         }
@@ -212,7 +219,47 @@ public class Register extends AppCompatActivity {
                         mLicense.setError("Invalid License Number");
                         return;
                     }
+                } */
+                //--------------------------------------------------------------------------------------//
+
+                // --    New DocAuth Method    -- //
+
+                /*  It will search for a pattern.
+                    The valid pattern is 'D'+'-'+(two digit, the entry year)+(short form of the passed medical college)
+                    For example, D-14DMC is a valid license number
+
+               */
+
+                if(!TextUtils.isEmpty(licenseNumber)) {
+
+                    Integer sz = licenseNumber.length();
+
+                    if(sz==7 || sz==8) {
+
+                        String ss = licenseNumber;
+
+                        if(!((getCharFromString(ss, 0))=='D' || (getCharFromString(ss, 0))=='d')) flag=false;
+                        if((getCharFromString(ss, 1))!='-') flag=false;
+
+                        if(!((getCharFromString(ss, 2))>='0' && (getCharFromString(ss, 2))<='9')) flag=false;
+                        if(!((getCharFromString(ss, 3))>='0' && (getCharFromString(ss, 3))<='9')) flag=false;
+
+                        if(!((getCharFromString(ss, sz-2))=='M' || (getCharFromString(ss, sz-2))=='m')) flag=false;
+                        if(!((getCharFromString(ss, sz-1))=='C' || (getCharFromString(ss, sz-1))=='c')) flag=false;
+
+                    }
+                    else flag=false;
+
+                    if(!flag) {
+                        mLicense.setError("Invalid License Number");
+                        flag=true;
+                        return;
+                    }
                 }
+
+                // --    New DocAuth Method    -- //
+
+
 
                 mProgressBar.setVisibility(View.VISIBLE);
 
