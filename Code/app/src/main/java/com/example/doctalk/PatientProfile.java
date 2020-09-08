@@ -25,11 +25,40 @@ public class PatientProfile extends AppCompatActivity {
     private String phoneID;
     private FirebaseUser user;
     private DatabaseReference databaseReference;
+    String currentPatientName,currentPatientAge,currentPatientLocation,currentPatientPhone,currentPatientAddiSymptoms;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_profile);
+
+        name = findViewById(R.id.patientProfileUserName);
+        age = findViewById(R.id.patientProfileUserAge);
+        location = findViewById(R.id.patientProfileUserLocation);
+        phone = findViewById(R.id.patientProfileUserPhone);
+        addiSymptoms = findViewById(R.id.patientProfileUserSymptoms);
+
+
+        currentPatientName = getIntent().getExtras().get("name").toString();
+        currentPatientAge = getIntent().getExtras().get("age").toString();
+        currentPatientLocation = getIntent().getExtras().get("location").toString();
+        currentPatientAddiSymptoms = getIntent().getExtras().get("addiSymptoms").toString();
+        currentPatientPhone = getIntent().getExtras().get("phone").toString();
+
+
+
+        name.setText(currentPatientName);
+        age.setText(currentPatientAge);
+        location.setText(currentPatientLocation);
+        phone.setText(currentPatientPhone);
+        addiSymptoms.setText(currentPatientAddiSymptoms);
+
+
+
+
+
+
 
 
     }

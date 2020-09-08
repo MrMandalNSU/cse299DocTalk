@@ -46,7 +46,7 @@ public class PatientListView extends AppCompatActivity {
                 for (DataSnapshot ds: dataSnapshot.getChildren())
                 {
                     patientHelperClass = ds.getValue(PatientHelperClass.class);
-                    patientArrayList.add(patientHelperClass.getName().toString() + "    " +patientHelperClass.getAddiSymptoms());
+                    patientArrayList.add(patientHelperClass.getName().toString());
                 }
 
                 patientListView.setAdapter(patientArrayAdapter);
@@ -66,36 +66,42 @@ public class PatientListView extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
+              PatientHelperClass patientHelperClass = (PatientHelperClass) patientListView.getItemAtPosition(position);
+
+
                 //fetch the details of the item
 
-               // databaseReference.child(String.valueOf(position+1)).addValueEventListener(new ValueEventListener() {
-                 //   @Override
-                   // public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //get details of the item
-                       // String name = dataSnapshot.child("name").getValue(String.class);
-                       // String age = dataSnapshot.child("age").getValue(String.class);
-                       // String location = dataSnapshot.child("location").getValue(String.class);
-                       // String phone = dataSnapshot.child("phone").getValue(String.class);
-                       // String addiSymptoms = dataSnapshot.child("addiSymptoms").getValue(String.class);
+               databaseReference.child(String.valueOf(position+1)).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        //open another acivity and pass these
-                       Intent intent = new Intent(PatientListView.this, PatientProfile.class);
-                       // intent.putExtra("name", name);
-                      //  intent.putExtra("age", age);
-                      //  intent.putExtra("location", location);
-                      //  intent.putExtra("phone", phone);
-                       // intent.putExtra("addiSymptoms", addiSymptoms);
-                       startActivity(intent);
+                            //get details of the item
+                            String name = dataSnapshot.child("name").getValue(String.class);
+                            String age = dataSnapshot.child("age").getValue(String.class);
+                            String location = dataSnapshot.child("location").getValue(String.class);
+                            String phone = dataSnapshot.child("phone").getValue(String.class);
+                            String addiSymptoms = dataSnapshot.child("addiSymptoms").getValue(String.class);
+
+                            //open another acivity and pass these
+                            Intent intent = new Intent(PatientListView.this, PatientProfile.class);
+                            intent.putExtra("name", name);
+                            intent.putExtra("age", age);
+                            intent.putExtra("location", location);
+                            intent.putExtra("phone", phone);
+                            intent.putExtra("addiSymptoms", addiSymptoms);
+                            startActivity(intent);
 
 
 
-                   // }
 
-                   // @Override
-                   // public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                   // }
-               // });
+                   }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+               });
 
 
             }
