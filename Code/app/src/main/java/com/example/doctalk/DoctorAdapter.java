@@ -1,5 +1,6 @@
 package com.example.doctalk;
 
+import android.content.Intent;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +25,24 @@ public class DoctorAdapter extends FirebaseRecyclerAdapter<UserRegistrationDocto
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull DoctorViewHolder holder, int position, @NonNull UserRegistrationDoctor model) {
+    protected void onBindViewHolder(@NonNull final DoctorViewHolder holder, int position, @NonNull final UserRegistrationDoctor model) {
 
         holder.fullname.setText(model.getFullname());
         holder.email.setText(Objects.requireNonNull(model).getEmail());
+
+        holder.doctorImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.fullname.getContext(),DoctorProfile.class);
+                intent.putExtra("fullname",model.getFullname());
+                intent.putExtra("email",model.getEmail());
+                intent.putExtra("phone",model.getPhone());
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                holder.doctorImageView.getContext().startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -55,4 +70,6 @@ public class DoctorAdapter extends FirebaseRecyclerAdapter<UserRegistrationDocto
 
         }
     }
+
+
 }

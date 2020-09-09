@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class PatientClass extends AppCompatActivity {
 
     private Button ocrbutton;
-    private Button patientsymptoms;
     private Button profilebutton;
     private Button doctorList;
 
@@ -27,7 +26,6 @@ public class PatientClass extends AppCompatActivity {
 
 
         ocrbutton = (Button) findViewById(R.id.ocr_btn); //ocr button
-        patientsymptoms = (Button) findViewById(R.id.symptoms_Btn);
         profilebutton = (Button) findViewById(R.id.profile_btn);
         doctorList = (Button) findViewById(R.id.doc_List);
 
@@ -46,16 +44,6 @@ public class PatientClass extends AppCompatActivity {
             }
         });
 
-
-        patientsymptoms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent2 = new Intent(PatientClass.this,Patient_Info.class);
-                startActivity( intent2);
-                finish();
-
-            }
-        });
 
         profilebutton.setOnClickListener(new View.OnClickListener() {
             @Override
