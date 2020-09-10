@@ -22,6 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DoctorAdapter extends FirebaseRecyclerAdapter<UserRegistrationDoctor,DoctorAdapter.DoctorViewHolder> {
 
+
     public DoctorAdapter(@NonNull FirebaseRecyclerOptions<UserRegistrationDoctor> options) {
         super(options);
     }
@@ -52,6 +53,7 @@ public class DoctorAdapter extends FirebaseRecyclerAdapter<UserRegistrationDocto
 
             }
         });
+
 
 
     }

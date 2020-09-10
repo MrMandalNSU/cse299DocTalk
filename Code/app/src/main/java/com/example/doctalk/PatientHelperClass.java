@@ -5,19 +5,20 @@ import java.io.Serializable;
 public class PatientHelperClass {
 
 
-    String name, age, location, phone, addiSymptoms,gender;
+    String name, age, location, phone, addiSymptoms,gender,doctorName;
 
     public PatientHelperClass() {
 
     }
 
-    public PatientHelperClass(String name, String age, String location, String phone, String addiSymptoms,String gender) {
+    public PatientHelperClass(String name, String age, String location, String phone, String addiSymptoms,String gender,String doctorName) {
         this.name = name;
         this.age = age;
         this.location = location;
         this.phone = phone;
         this.addiSymptoms = addiSymptoms;
         this.gender = gender;
+        this.doctorName= doctorName;
     }
 
     public String getGender() {
@@ -66,5 +67,13 @@ public class PatientHelperClass {
 
     public void setAddiSymptoms(String addiSymptoms) {
         this.addiSymptoms = addiSymptoms;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 }

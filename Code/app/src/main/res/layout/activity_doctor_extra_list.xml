@@ -9,41 +9,41 @@
     app:cardUseCompatPadding="true"
     >
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="20dp">
+    <RelativeLayout
+        android:layout_width="401dp"
+        android:layout_height="110dp"
+        android:padding="20dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/doctorimageview"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@mipmap/ic_launcher"
-        android:layout_centerVertical="true" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/doctorimageview"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/doctorname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This is a demo name"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:layout_toRightOf="@+id/doctorimageview"
-        android:layout_marginLeft="15dp"/>
+        <TextView
+            android:id="@+id/doctorname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/doctorimageview"
+            android:text="This is a demo name"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/doctoremail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/doctorname"
-        android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/doctorimageview"
-        android:text="This is a demo email"
-        android:textColor="#000"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/doctoremail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/doctorname"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/doctorimageview"
+            android:text="This is a demo email"
+            android:textColor="#000"
+            android:textSize="15sp" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
