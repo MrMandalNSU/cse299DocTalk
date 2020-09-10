@@ -21,9 +21,10 @@ import java.util.Objects;
 
 public class Patient_Info extends AppCompatActivity {
 
-    EditText patientName, patientAge, patientAddress, patientNumber, patientAddSymptoms;
+    EditText patientName, patientAge, patientAddress, patientNumber, patientAddSymptoms,patientGender;
     Button patientInfoSubmitBtn;
 
+    public int position;
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
@@ -38,7 +39,9 @@ public class Patient_Info extends AppCompatActivity {
         patientAddress = findViewById(R.id.location);
         patientNumber = findViewById(R.id.phone);
         patientAddSymptoms = findViewById(R.id.additionalsymptoms);
+        patientGender = findViewById(R.id.patientgender);
         patientInfoSubmitBtn = findViewById(R.id.patientinfobtn);
+
 
 
 
@@ -55,8 +58,9 @@ public class Patient_Info extends AppCompatActivity {
                 String location = patientAddress.getText().toString();
                 String phone = patientNumber.getText().toString();
                 String addiSymptoms = patientAddSymptoms.getText().toString();
+                String gender = patientGender.getText().toString();
 
-                PatientHelperClass patientHelperClass = new PatientHelperClass(name, age, location, phone, addiSymptoms);
+                PatientHelperClass patientHelperClass = new PatientHelperClass(name, age, location, phone, addiSymptoms,gender);
 
                 reference.child(phone).setValue(patientHelperClass);
 

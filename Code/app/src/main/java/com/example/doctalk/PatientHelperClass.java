@@ -5,18 +5,27 @@ import java.io.Serializable;
 public class PatientHelperClass {
 
 
-    String name, age, location, phone, addiSymptoms;
+    String name, age, location, phone, addiSymptoms,gender;
 
     public PatientHelperClass() {
 
     }
 
-    public PatientHelperClass(String name, String age, String location, String phone, String addiSymptoms) {
+    public PatientHelperClass(String name, String age, String location, String phone, String addiSymptoms,String gender) {
         this.name = name;
         this.age = age;
         this.location = location;
         this.phone = phone;
         this.addiSymptoms = addiSymptoms;
+        this.gender = gender;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getName() {

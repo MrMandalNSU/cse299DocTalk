@@ -16,6 +16,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 import java.util.Objects;
 
+import javax.net.ssl.SSLSession;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DoctorAdapter extends FirebaseRecyclerAdapter<UserRegistrationDoctor,DoctorAdapter.DoctorViewHolder> {
@@ -25,24 +27,32 @@ public class DoctorAdapter extends FirebaseRecyclerAdapter<UserRegistrationDocto
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final DoctorViewHolder holder, int position, @NonNull final UserRegistrationDoctor model) {
+    public void onBindViewHolder(@NonNull final DoctorViewHolder holder, final int position, @NonNull final UserRegistrationDoctor model) {
+
+
 
         holder.fullname.setText(model.getFullname());
         holder.email.setText(Objects.requireNonNull(model).getEmail());
 
+
+
         holder.doctorImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(holder.fullname.getContext(),DoctorProfile.class);
                 intent.putExtra("fullname",model.getFullname());
                 intent.putExtra("email",model.getEmail());
                 intent.putExtra("phone",model.getPhone());
+
+
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 holder.doctorImageView.getContext().startActivity(intent);
 
             }
         });
+
 
     }
 
@@ -69,6 +79,7 @@ public class DoctorAdapter extends FirebaseRecyclerAdapter<UserRegistrationDocto
 
 
         }
+
     }
 
 

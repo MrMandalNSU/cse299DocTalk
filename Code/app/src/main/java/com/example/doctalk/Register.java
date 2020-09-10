@@ -274,7 +274,9 @@ public class Register extends AppCompatActivity {
                             Toast.makeText(Register.this, "Patient Profile Created Successfully", Toast.LENGTH_SHORT).show();
 
                             UserRegistration userRegistration = new UserRegistration(fullName,email,phone,userType);
-                            FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(userRegistration).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(userRegistration)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()) {
@@ -297,7 +299,9 @@ public class Register extends AppCompatActivity {
                             Toast.makeText(Register.this, "Doctor Profile Created Successfully", Toast.LENGTH_SHORT).show();
 
                             UserRegistrationDoctor userRegistrationDoctor = new UserRegistrationDoctor(fullName,email,phone,userType,licenseNumber);
-                            FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(userRegistrationDoctor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                                    .setValue(userRegistrationDoctor).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()) {
@@ -307,8 +311,27 @@ public class Register extends AppCompatActivity {
                                         Toast.makeText(Register.this,"Failed to Register",Toast.LENGTH_SHORT).show();
                                     }
 
+
                                 }
                             });
+
+                            UserRegistrationDoctor userRegistrationDoctor1 = new UserRegistrationDoctor(fullName,email,phone,userType,licenseNumber);
+                            FirebaseDatabase.getInstance().getReference("Doctors")
+                                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                                    .setValue(userRegistrationDoctor1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        Toast.makeText(Register.this, " Doctor Registraton Successful", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Toast.makeText(Register.this,"Failed to Register",Toast.LENGTH_SHORT).show();
+                                    }
+
+
+                                }
+                            });
+
 
                             startActivity(new Intent(getApplicationContext(), DoctorClass.class));
 

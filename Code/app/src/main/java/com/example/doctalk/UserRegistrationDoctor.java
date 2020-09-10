@@ -3,6 +3,7 @@ package com.example.doctalk;
 public class UserRegistrationDoctor {
 
     public String fullname, email, phone, userType,licenseNumber;
+    public int position;
 
 
     public UserRegistrationDoctor() {
@@ -58,5 +59,11 @@ public class UserRegistrationDoctor {
         this.licenseNumber = licenseNumber;
     }
 
+    public int getPosition() {
+        return position;
+    }
 
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }
