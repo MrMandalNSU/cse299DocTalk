@@ -40,8 +40,9 @@ public class PatientClass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent2 = new Intent(PatientClass.this,Patient_Info.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intent2);
-                finish();
+
 
             }
         });
