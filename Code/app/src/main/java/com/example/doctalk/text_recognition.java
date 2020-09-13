@@ -312,6 +312,30 @@ public class text_recognition extends AppCompatActivity {
     }
 
     // get url string to search for
+    public String getUrlStringG() {
+
+        String str = mResult.getText().toString();
+
+        String ret = "https://www.google.com/search?q=";
+
+        for(int i=0; i<min(str.length(), 250); i++) {
+
+            ret += str.charAt(i);
+        }
+
+        return ret;
+    }
+
+    // search on YouTube
+    public void searchGoogle(View view) {
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getUrlStringG()));
+
+        startActivity(browserIntent);
+
+    }
+
+    // get url string to search for
     public String getUrlString() {
 
         String str = mResult.getText().toString();

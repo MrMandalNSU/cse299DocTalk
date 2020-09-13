@@ -109,6 +109,7 @@
 
                         android:background="#FFFFFF"
                         android:backgroundTint="#8602D8"
+                        android:onClick="searchGoogle"
                         android:text="Search On Google"
                         android:textColor="#FFFFFF" />
 
