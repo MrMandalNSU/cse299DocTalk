@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PatientListView extends AppCompatActivity {
 
@@ -54,45 +55,27 @@ public class PatientListView extends AppCompatActivity {
             recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-            FirebaseAuth fAuth = FirebaseAuth.getInstance();
+            //FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
+            SessionManager sessionManager = new SessionManager(this);
+            sessionManager.getUserDetailFromSession();
+            HashMap<String,String> userdetails = sessionManager.getUserDetailFromSession();
 
-        user = fAuth.getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-        userID = user.getUid();
+            String Name = userdetails.get(SessionManager.KEY_FULLNAME);
 
-        databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserRegistration userRegistration = dataSnapshot.getValue(UserRegistration.class);
-
-                if(userRegistration != null)
-                {
-                    Name = userRegistration.fullname;
-                    Toast.makeText(PatientListView.this," "+Name,Toast.LENGTH_SHORT).show();
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            Toast.makeText(PatientListView.this," "+Name,Toast.LENGTH_SHORT).show();
 
 
 
-            }
-        });
 
-
-
-            //doctorListView = (ListView) findViewById(R.id.doctorListView);
+        //doctorListView = (ListView) findViewById(R.id.doctorListView);
             //doctorArrayList = new ArrayList<>();
             //doctorArrayAdapter = new ArrayAdapter<String>(this,R.layout.activity_doctor_extra_list,R.id.doctorList,doctorArrayList);
 
 
             FirebaseRecyclerOptions<PatientHelperClass> options =
                     new FirebaseRecyclerOptions.Builder<PatientHelperClass>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Patient")
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Patient").orderByChild("doctorName").equalTo(Name)
                                     , PatientHelperClass.class)
                             .build();
 

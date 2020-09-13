@@ -14,7 +14,7 @@ public class DoctorProfile extends AppCompatActivity {
 
     TextView fullname, email, phone;
     String currentDoctorName,currentDoctorEmail,currentDoctorPhone;
-    private Button patientsymptoms;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class DoctorProfile extends AppCompatActivity {
         fullname = findViewById(R.id.doctorProfileUserName);
         email = findViewById(R.id.doctorProfileUserEmail);
         phone = findViewById(R.id.doctorProfileUserPhone);
-        patientsymptoms = (Button) findViewById(R.id.BookYourAppointmentbtn);
+
 
         currentDoctorName= getIntent().getStringExtra("fullname");
         currentDoctorEmail= getIntent().getStringExtra("email");
@@ -36,15 +36,7 @@ public class DoctorProfile extends AppCompatActivity {
         phone.setText(currentDoctorPhone);
 
 
-        patientsymptoms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent2 = new Intent(DoctorProfile.this,Patient_Info.class);
-                startActivity( intent2);
-                finish();
 
-            }
-        });
 
 
 

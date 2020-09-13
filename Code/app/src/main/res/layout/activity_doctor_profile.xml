@@ -94,20 +94,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.448" />
 
-        <Button
-            android:id="@+id/BookYourAppointmentbtn"
-            android:layout_width="266dp"
-            android:layout_height="38dp"
-            android:background="@drawable/button"
-            android:fontFamily="@font/bold"
-            android:text="Book Your Appointment"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.667" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
