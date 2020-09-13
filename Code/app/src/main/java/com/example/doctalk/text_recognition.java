@@ -46,6 +46,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.min;
@@ -67,6 +68,17 @@ public class text_recognition extends AppCompatActivity {
 
     Uri image_uri;
 
+    TextView stringTextView; //This is for medicines
+    TextView stringTextView2; //This is for exercises
+
+    ArrayList<String> list1 = new ArrayList<String>(); //array list for medicines
+    ArrayList<String> list2 = new ArrayList<String>(); //array list for exercise
+
+    public static char getCharFromString(String str, int index)
+    {
+        return str.charAt(index);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +89,9 @@ public class text_recognition extends AppCompatActivity {
         mResult = findViewById(R.id.result);
         mImagePreview= findViewById(R.id.imagePreview);
         mSearchCard = findViewById(R.id.ytcard);
+
+        stringTextView = (TextView)findViewById(R.id.TV1); //This is for medicines
+        stringTextView2 = (TextView)findViewById(R.id.TV2); //This is for exercises
 
 
         //Camera Permission
@@ -299,6 +314,8 @@ public class text_recognition extends AppCompatActivity {
                     mResult.setText(stringBuilder.toString());
 
                     mSearchCard.setVisibility(View.VISIBLE);
+
+                    textMod(); //calling the function for text modification
                 }
             }
             else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
@@ -310,6 +327,96 @@ public class text_recognition extends AppCompatActivity {
         }
 
     }
+
+    // -- modification of the text part -- //
+
+
+    public void textMod() {
+
+        list1.clear();
+        list2.clear();
+
+        String line = mResult.getText().toString();
+
+        String word = "";
+
+        Integer cnt = 0;
+
+        Boolean flag1 = false;
+        Boolean flag2 = false;
+
+        Integer sz = line.length();
+
+        for (int i = 0; i < sz; i++) {
+
+            if (getCharFromString(line, i) == ':' && cnt == 0) {
+                cnt++;
+                flag1 = true;
+                continue;
+            }
+
+            if (getCharFromString(line, i) == ':' && cnt != 0) {
+                flag2 = true;
+                continue;
+            }
+
+            if (flag1) //For medicines only
+            {
+                if (getCharFromString(line, i) == ',' || getCharFromString(line, i) == '.') {
+                    list1.add(word);
+                    word = "";
+
+                    if (getCharFromString(line, i) == '.') {
+                        flag1 = false;
+                        continue;
+                    }
+
+                    continue;
+
+                }
+
+                if (getCharFromString(line, i) != ' ') {
+                    word += getCharFromString(line, i);
+                }
+            }
+
+            if (flag2) //For exercises only
+            {
+                if (getCharFromString(line, i) == ',' || getCharFromString(line, i) == '.') {
+                    list2.add(word);
+                    word = "";
+
+                    if (getCharFromString(line, i) == '.') {
+                        flag2 = false;
+                        continue;
+                    }
+
+                    continue;
+
+                }
+
+                if (getCharFromString(line, i) != ' ') {
+                    word += getCharFromString(line, i);
+                }
+            }
+
+        }
+
+        for(int i=0; i < list1.size(); i++){
+            stringTextView.setText(stringTextView.getText() + list1.get(i) + " -- ");
+        }
+
+        for(int i=0; i < list2.size(); i++){
+            stringTextView2.setText(stringTextView2.getText() + list2.get(i) + " -- ");
+        }
+
+        list1.clear();
+        list2.clear();
+
+    }
+
+    // --     mod of text ends here     -- //
+
 
     // get url string to search for
     public String getUrlStringG() {
