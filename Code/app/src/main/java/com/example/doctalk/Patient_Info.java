@@ -3,6 +3,8 @@ package com.example.doctalk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,11 +26,9 @@ import java.util.Objects;
 
 public class Patient_Info extends AppCompatActivity {
 
+
     EditText patientName, patientAge, patientAddress, patientNumber, patientAddSymptoms,patientGender;
     Button patientInfoSubmitBtn;
-
-    public int position;
-
     FirebaseDatabase rootNode;
     DatabaseReference reference;
     Spinner spinner;
@@ -45,16 +45,25 @@ public class Patient_Info extends AppCompatActivity {
         patientAddSymptoms = findViewById(R.id.additionalsymptoms);
         patientGender = findViewById(R.id.patientgender);
         patientInfoSubmitBtn = findViewById(R.id.patientinfobtn);
-        spinner= findViewById(R.id.spinner);
+        spinner= findViewById(R.id.spinner2);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference fDatabaseRoot = database.getReference();
 
+
+
+
         final List<String> doctorNameList = new ArrayList<String>();
-        final ArrayAdapter<String> doctorAdapter = new ArrayAdapter<String>(Patient_Info.this, android.R.layout.simple_spinner_item,doctorNameList );
+        final ArrayAdapter<String> doctorAdapter = new ArrayAdapter<String>
+                (Patient_Info.this, android.R.layout.simple_spinner_item,doctorNameList );
+
         doctorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        fDatabaseRoot.child("Doctors").addListenerForSingleValueEvent(new ValueEventListener() {
+        spinner.setPrompt("Select Your Doctor");
+
+
+        fDatabaseRoot.child("Users").orderByChild("userType").equalTo("Doctor").
+                addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Is better to use a List, because you don't know the size
@@ -64,6 +73,7 @@ public class Patient_Info extends AppCompatActivity {
 
                 for (DataSnapshot addressSnapshot: dataSnapshot.getChildren()) {
                     String doctorname = addressSnapshot.child("fullname").getValue(String.class);
+
                     if (doctorname!=null){
                         doctorNameList.add(doctorname);
                     }
@@ -84,8 +94,6 @@ public class Patient_Info extends AppCompatActivity {
 
 
 
-
-
         patientInfoSubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +102,8 @@ public class Patient_Info extends AppCompatActivity {
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("Patient");
 
+
+
                 String name = patientName.getText().toString();
                 String age = patientAge.getText().toString();
                 String location = patientAddress.getText().toString();
@@ -101,13 +111,22 @@ public class Patient_Info extends AppCompatActivity {
                 String addiSymptoms = patientAddSymptoms.getText().toString();
                 String gender = patientGender.getText().toString();
                 String doctorName = spinner.getSelectedItem().toString();
-
-                PatientHelperClass patientHelperClass = new PatientHelperClass(name, age, location, phone, addiSymptoms,gender,doctorName);
-
-                reference.child(phone).setValue(patientHelperClass);
+                PatientHelperClass patientHelperClass =
+                        new PatientHelperClass(name, age, location, phone, addiSymptoms,gender,doctorName);
 
 
-                Toast.makeText(Patient_Info.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
+                if(!TextUtils.isEmpty(doctorName) && !TextUtils.isEmpty(phone) && !TextUtils.isEmpty(name)
+                        && !TextUtils.isEmpty(age) && !TextUtils.isEmpty(location) &&
+                        !TextUtils.isEmpty(addiSymptoms) && !TextUtils.isEmpty(gender)) {
+
+                    reference.child(phone).setValue(patientHelperClass);
+                    Toast.makeText(Patient_Info.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
+
+
+
+                }
+
+
 
             }
         });

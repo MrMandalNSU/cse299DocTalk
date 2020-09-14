@@ -115,7 +115,7 @@ public class Register extends AppCompatActivity {
         mPhone = findViewById(R.id.phone);
         mRegisterbtn = findViewById(R.id.registerbtn);
         mLoginbtn = findViewById(R.id.createtext);
-        spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner1);
         mLicense = findViewById(R.id.license);
 
 
@@ -124,7 +124,8 @@ public class Register extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         mProgressBar = findViewById(R.id.progressBar);
 
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.UserType,R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter=
+                ArrayAdapter.createFromResource(this,R.array.UserType,R.layout.support_simple_spinner_dropdown_item);
         spinner.setPrompt("Select One");
         spinner.setAdapter(new NothingSelectedSpinnerAdapter(adapter, R.layout.contact_spinner_row_nothing_selected,
                         // R.layout.contact_spinner_nothing_selected_dropdown, // Optional
