@@ -25,6 +25,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -333,7 +334,6 @@ public class text_recognition2 extends AppCompatActivity {
 
     // -- modification of the text part -- //
 
-
     public void textMod() {
 
         String[] disease_list = getResources().getStringArray(R.array.diseases);
@@ -370,6 +370,21 @@ public class text_recognition2 extends AppCompatActivity {
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list1);
 
         mListView.setAdapter(arrayAdapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String urlString = "https://www.youtube.com/results?search_query=";
+
+                urlString += list1.get(i).toString();
+                urlString += " disease";
+
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+
+                startActivity(browserIntent);
+            }
+        });
     }
 
     // --     mod of text ends here     -- //
