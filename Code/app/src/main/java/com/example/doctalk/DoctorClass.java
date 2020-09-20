@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DoctorClass extends AppCompatActivity {
 
     private Button ocrbutton;
+    private Button ocrbutton2;
     private Button profilebutton;
     private Button respondtopatient;
 
@@ -43,6 +44,7 @@ public class DoctorClass extends AppCompatActivity {
 
 
                 ocrbutton = (Button) findViewById(R.id.ocr_btnDoc); //ocr button
+                ocrbutton2 = (Button) findViewById(R.id.ocr_btnDoc2);
                 profilebutton = (Button) findViewById(R.id.profile_btnDoc);
                 respondtopatient = (Button) findViewById(R.id.symptoms_BtnDoc);
                 FirebaseAuth fAuth;
@@ -56,6 +58,17 @@ public class DoctorClass extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Intent intent1 = new Intent(com.example.doctalk.DoctorClass.this,text_recognition.class);
+                        intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity( intent1);
+
+
+                    }
+                });
+
+                ocrbutton2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent1 = new Intent(com.example.doctalk.DoctorClass.this,text_recognition2.class);
                         intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity( intent1);
 

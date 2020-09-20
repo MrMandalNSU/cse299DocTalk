@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class PatientClass extends AppCompatActivity {
 
     private Button ocrbutton;
+    private Button ocrbutton2;
     private Button profilebutton;
     private Button doctorList;
     private Button bookUrAppointment;
@@ -27,6 +28,7 @@ public class PatientClass extends AppCompatActivity {
 
 
         ocrbutton = (Button) findViewById(R.id.ocr_btn); //ocr button
+        ocrbutton2 = (Button) findViewById(R.id.ocr_btn2);
         profilebutton = (Button) findViewById(R.id.profile_btn);
         doctorList = (Button) findViewById(R.id.doc_List);
         bookUrAppointment = (Button) findViewById(R.id.symptoms_Btn);
@@ -51,6 +53,17 @@ public class PatientClass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(PatientClass.this,text_recognition.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity( intent1);
+
+
+            }
+        });
+
+        ocrbutton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(PatientClass.this,text_recognition2.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity( intent1);
 

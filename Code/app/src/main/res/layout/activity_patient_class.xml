@@ -16,19 +16,19 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintVertical_bias="0.183" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="286dp"
         android:layout_height="37dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="48dp"
         android:fontFamily="@font/bold"
         android:text="Welcome to DocTalk"
         android:textColor="#4E88A3"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,23 +42,36 @@
         android:textColor="#436B8C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818" />
+        app:layout_constraintVertical_bias="0.816" />
 
     <Button
         android:id="@+id/ocr_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="177dp"
+        android:layout_height="39dp"
         android:fontFamily="@font/damion"
-        android:text="OCR"
+        android:text="Scan Prescription"
         app:layout_constraintBottom_toTopOf="@+id/logout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.215" />
+        app:layout_constraintVertical_bias="0.17" />
+
+    <Button
+        android:id="@+id/ocr_btn2"
+        android:layout_width="177dp"
+        android:layout_height="39dp"
+        android:fontFamily="@font/damion"
+        android:text="Scan Articles"
+        app:layout_constraintBottom_toTopOf="@+id/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.343" />
 
     <Button
         android:id="@+id/symptoms_Btn"
@@ -69,7 +82,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ocr_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/ocr_btn"
+        app:layout_constraintVertical_bias="0.771" />
 
     <Button
         android:id="@+id/profile_btn"
@@ -82,7 +96,7 @@
         app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ocr_btn"
-        app:layout_constraintVertical_bias="0.705" />
+        app:layout_constraintVertical_bias="0.837" />
 
     <Button
         android:id="@+id/doc_List"
