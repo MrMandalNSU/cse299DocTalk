@@ -25,9 +25,11 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +58,7 @@ public class text_recognition2 extends AppCompatActivity {
     EditText mResult;
     ImageView mImagePreview;
     CardView mSearchCard;
+    ListView mListView;
 
 
     private static final int CAMERA_REQUEST_CODE = 200;
@@ -87,6 +90,7 @@ public class text_recognition2 extends AppCompatActivity {
         mResult = findViewById(R.id.result2);
         mImagePreview= findViewById(R.id.imagePreview2);
         mSearchCard = findViewById(R.id.ytcard2);
+        mListView = findViewById(R.id.DisList);
 
         stringTextView = (TextView)findViewById(R.id.TV3); //This is for diseases
 
@@ -332,7 +336,21 @@ public class text_recognition2 extends AppCompatActivity {
 
         list1.clear();
 
-        String line = mResult.getText().toString();
+        list1.add("Some");
+        list1.add("Random");
+        list1.add("Disease");
+        list1.add("Names");
+        list1.add("Like");
+        list1.add("Corona");
+        list1.add("Dengue");
+        list1.add("Fever");
+        list1.add("Rash");
+        list1.add("Sore Throat");
+        list1.add("Etc");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list1);
+
+        mListView.setAdapter(arrayAdapter);
     }
 
     // --     mod of text ends here     -- //
