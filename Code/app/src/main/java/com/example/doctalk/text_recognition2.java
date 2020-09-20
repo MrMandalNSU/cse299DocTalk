@@ -49,7 +49,9 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.lang.Math.min;
 
@@ -334,19 +336,36 @@ public class text_recognition2 extends AppCompatActivity {
 
     public void textMod() {
 
+        String[] disease_list = getResources().getStringArray(R.array.diseases);
+        Set<String> disease_set = new HashSet<String>();
+        Set<String> alreadyIn = new HashSet<String>();
+
+        for(int i=0; i<disease_list.length; i++) {
+            disease_set.add(disease_list[i]);
+        }
+
+        String txt = mResult.getText().toString();
+        String word = new String();
+
         list1.clear();
 
-        list1.add("Some");
-        list1.add("Random");
-        list1.add("Disease");
-        list1.add("Names");
-        list1.add("Like");
-        list1.add("Corona");
-        list1.add("Dengue");
-        list1.add("Fever");
-        list1.add("Rash");
-        list1.add("Sore Throat");
-        list1.add("Etc");
+        for(int i=0; i<txt.length(); i++) {
+            if(txt.charAt(i)>='a' && txt.charAt(i)<='z') {
+                word += txt.charAt(i);
+            }
+            else if(txt.charAt(i)>='A' && txt.charAt(i)<='Z') {
+                word += (txt.charAt(i)-'A'+'a');
+            }
+            else {
+                if(word.length()>0) {
+                    if(disease_set.contains(word) && !alreadyIn.contains(word)) {
+                        list1.add(word);
+                        alreadyIn.add(word);
+                    }
+                }
+                word = "";
+            }
+        }
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list1);
 

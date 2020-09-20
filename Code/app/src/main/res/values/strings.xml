@@ -7,4 +7,14 @@
 
     </string-array>
 
+    <string-array name="diseases">
+        <item> coronavirus </item>
+        <item> dengue </item>
+        <item> fever </item>
+        <item> allergies </item>
+        <item> anxiety </item>
+        <item> asthma </item>
+
+    </string-array>
+
 </resources>
