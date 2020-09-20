@@ -6,6 +6,7 @@ public class PatientHelperClass {
 
 
     String name, age, location, phone, addiSymptoms,gender,doctorName;
+    int position;
 
     public PatientHelperClass() {
 
@@ -76,4 +77,5 @@ public class PatientHelperClass {
     public void setDoctorName(String doctorName) {
         this.doctorName = doctorName;
     }
+
 }

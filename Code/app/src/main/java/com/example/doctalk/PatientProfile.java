@@ -26,6 +26,7 @@ public class PatientProfile extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference databaseReference;
     String currentPatientName,currentPatientAge,currentPatientLocation,currentPatientPhone,currentPatientAddiSymptoms;
+    String position;
 
 
     @Override

@@ -23,9 +23,8 @@ public class PatientAdapter extends FirebaseRecyclerAdapter<PatientHelperClass,P
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final PatientAdapter.PatientViewHolder holder, final int position, @NonNull final PatientHelperClass model) {
-
-
+    public void onBindViewHolder(@NonNull final PatientAdapter.PatientViewHolder holder,
+                                 final int position, @NonNull final PatientHelperClass model) {
 
         holder.name.setText(model.getName());
         holder.addiSymptoms.setText(Objects.requireNonNull(model).getAddiSymptoms());
@@ -41,21 +40,21 @@ public class PatientAdapter extends FirebaseRecyclerAdapter<PatientHelperClass,P
             public void onClick(View view) {
 
                 Intent intent = new Intent(holder.name.getContext(),PatientProfile.class);
+
                 intent.putExtra("name",model.getName());
                 intent.putExtra("age",model.getAge());
                 intent.putExtra("phone",model.getPhone());
                 intent.putExtra("addiSymptoms",model.getAddiSymptoms());
                 intent.putExtra("gender",model.getGender());
                 intent.putExtra("location",model.getLocation());
-
-
-
-
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 holder.patientImageView.getContext().startActivity(intent);
 
             }
         });
+
+
+
 
 
 

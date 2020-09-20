@@ -75,7 +75,9 @@ public class PatientListView extends AppCompatActivity {
 
             FirebaseRecyclerOptions<PatientHelperClass> options =
                     new FirebaseRecyclerOptions.Builder<PatientHelperClass>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("Patient").orderByChild("doctorName").equalTo(Name)
+                            .setQuery(FirebaseDatabase.getInstance().
+                                            getReference().child("Patient").
+                                            orderByChild("doctorName").equalTo(Name)
                                     , PatientHelperClass.class)
                             .build();
 

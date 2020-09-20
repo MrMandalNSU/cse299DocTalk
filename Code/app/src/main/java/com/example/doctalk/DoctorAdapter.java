@@ -28,12 +28,15 @@ public class DoctorAdapter extends FirebaseRecyclerAdapter<UserRegistrationDocto
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final DoctorViewHolder holder, final int position, @NonNull final UserRegistrationDoctor model) {
+    public void onBindViewHolder(@NonNull final DoctorViewHolder holder,
+                                 final int position,
+                                 @NonNull final UserRegistrationDoctor model) {
 
 
 
         holder.fullname.setText(model.getFullname());
         holder.email.setText(Objects.requireNonNull(model).getEmail());
+
 
 
 
@@ -70,6 +73,7 @@ public class DoctorAdapter extends FirebaseRecyclerAdapter<UserRegistrationDocto
 
         CircleImageView doctorImageView;
         TextView fullname,email;
+
 
 
         public DoctorViewHolder(@NonNull View itemView) {
