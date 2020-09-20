@@ -1,5 +1,27 @@
 package com.example.doctalk;
 
+import android.Manifest;
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -9,45 +31,13 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
-import com.google.firebase.ml.vision.FirebaseVision;
-import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.text.FirebaseVisionText;
-import com.google.firebase.ml.vision.text.FirebaseVisionTextDetector;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
 import static java.lang.Math.min;
 
@@ -71,8 +61,12 @@ public class text_recognition extends AppCompatActivity {
     TextView stringTextView; //This is for medicines
     TextView stringTextView2; //This is for exercises
 
-    ArrayList<String> list1 = new ArrayList<String>(); //array list for medicines
-    ArrayList<String> list2 = new ArrayList<String>(); //array list for exercise
+    ArrayList<String> list1 = new ArrayList<>(); //array list for medicines
+    ArrayList<String> list2 = new ArrayList<>(); //array list for exercise
+
+    String selectedItem;
+
+    private android.app.AlertDialog.Builder spinner;
 
     public static char getCharFromString(String str, int index)
     {
@@ -90,15 +84,14 @@ public class text_recognition extends AppCompatActivity {
         mImagePreview= findViewById(R.id.imagePreview);
         mSearchCard = findViewById(R.id.ytcard);
 
-        stringTextView = (TextView)findViewById(R.id.TV1); //This is for medicines
-        stringTextView2 = (TextView)findViewById(R.id.TV2); //This is for exercises
+        //stringTextView = (TextView)findViewById(R.id.TV1); //This is for medicines
+        //stringTextView2 = (TextView)findViewById(R.id.TV2); //This is for exercises
 
 
         //Camera Permission
 
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
 
     }
 
@@ -402,6 +395,8 @@ public class text_recognition extends AppCompatActivity {
 
         }
 
+        /* Previous version of Med and Exe
+
         for(int i=0; i < list1.size(); i++){
             stringTextView.setText(stringTextView.getText() + list1.get(i) + " -- ");
         }
@@ -410,8 +405,61 @@ public class text_recognition extends AppCompatActivity {
             stringTextView2.setText(stringTextView2.getText() + list2.get(i) + " -- ");
         }
 
-        list1.clear();
-        list2.clear();
+        */
+
+        //list1.clear();
+        //list2.clear();
+
+        //////////////////// -- Spinner -- ////////////////////
+
+        Spinner spinnerMed = findViewById(R.id.spinnerMed); //This is for the Spinner Med
+        Spinner spinnerExe = findViewById(R.id.spinnerExe); //This is for the Spinner Exe
+
+        //Medicine
+        final ArrayAdapter<String> arrayAdapterMed = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list1);
+        arrayAdapterMed.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMed.setAdapter(arrayAdapterMed);
+
+        spinnerMed.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String tutorialsName = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(parent.getContext(), "Selected: " + tutorialsName, Toast.LENGTH_LONG).show();
+
+                selectedItem = tutorialsName;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+            }
+        });
+
+
+        //Exercise
+        final ArrayAdapter<String> arrayAdapterExe = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list2);
+        arrayAdapterExe.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerExe.setAdapter(arrayAdapterExe);
+
+        spinnerExe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String tutorialsName = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(parent.getContext(), "Selected: " + tutorialsName, Toast.LENGTH_LONG).show();
+
+                selectedItem = tutorialsName;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+            }
+
+        });
+
+        //////////////////// -- Spinner -- ////////////////////
 
     }
 
@@ -421,7 +469,9 @@ public class text_recognition extends AppCompatActivity {
     // get url string to search for
     public String getUrlStringG() {
 
-        String str = mResult.getText().toString();
+        //String str = mResult.getText().toString();
+
+        String str = selectedItem;
 
         String ret = "https://www.google.com/search?q=";
 
@@ -445,7 +495,9 @@ public class text_recognition extends AppCompatActivity {
     // get url string to search for
     public String getUrlString() {
 
-        String str = mResult.getText().toString();
+        //String str = mResult.getText().toString();
+
+        String str = selectedItem;
 
         String ret = "https://www.youtube.com/results?search_query=";
 
