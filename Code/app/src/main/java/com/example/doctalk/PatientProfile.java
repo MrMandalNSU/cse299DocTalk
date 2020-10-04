@@ -57,10 +57,5 @@ public class PatientProfile extends AppCompatActivity {
 
 
 
-
-
-
-
-
     }
 }
